@@ -17,10 +17,22 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+    protected $primaryKey = 'idUsuario';
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'tipoDocumento',
+        'nombreUsuario',
+        'apellidoUsuario',
+        'fechaNacimiento',
+        'edad',
+        'genero',
+        'telefono',
+        'profesion',
+        'barrio',
+        'direccion',
+        'correo',
+        'contrasenia',
+        'fk_id_rol',
     ];
 
     /**
@@ -29,7 +41,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'contrasenia',
         'remember_token',
     ];
 
@@ -41,4 +53,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function rol()
+    {
+        return $this->belongsTo(Role::class, 'fk_id_rol', 'idRol');
+    }
+    
 }
